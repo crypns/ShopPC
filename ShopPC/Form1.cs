@@ -30,6 +30,7 @@ namespace ShopPC
             LoadSales();
             LoadUsersComboBox();
             LoadRolesComboBox();
+            DateFormat();
         }
 
         private void InitializeDataGridView()
@@ -67,6 +68,15 @@ namespace ShopPC
             dataGridViewSales.Columns.Add("TotalCost", "Общая стоимость");
             dataGridViewSales.Columns.Add("Seller", "Продавец");
             dataGridViewSales.Columns.Add("SaleDate", "Дата продажи");
+        }
+
+        private void DateFormat()
+        {
+            dateTimePickerStartDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerStartDate.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+
+            dateTimePickerEndDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEndDate.CustomFormat = "dd/MM/yyyy hh:mm:ss";
         }
 
         private void LoadCategories()
@@ -978,7 +988,6 @@ namespace ShopPC
             }
         }
 
-
         private void buttonAddToSales_Click(object sender, EventArgs e)
         {
             User selectedUser = comboBoxUsers.SelectedItem as User;
@@ -1065,8 +1074,6 @@ namespace ShopPC
             return 0;
         }
 
-
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab == tabPage2)
@@ -1075,5 +1082,59 @@ namespace ShopPC
                 ClearProductFields();
             }
         }
+
+        private List<SalesSummaryEntry> LoadSalesReport(DateTime startDate, DateTime endDate)
+        {
+            List<SalesSummaryEntry> salesSummary = new List<SalesSummaryEntry>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Users.Name AS SellerName, SUM(Sales.Quantity) AS TotalQuantity, " +
+                               "SUM(Sales.TotalCost) AS TotalSalesAmount " +
+                               "FROM Sales " +
+                               "INNER JOIN Users ON Sales.SellerId = Users.Id " +
+                               "WHERE Sales.SaleDate BETWEEN @StartDate AND @EndDate " +
+                               "GROUP BY Users.Name";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@StartDate", startDate);
+                    command.Parameters.AddWithValue("@EndDate", endDate);
+
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string sellerName = reader.GetString(0);
+                            int totalQuantity = reader.GetInt32(1);
+                            decimal totalSalesAmount = reader.GetDecimal(2);
+
+                            salesSummary.Add(new SalesSummaryEntry
+                            {
+                                SellerName = sellerName,
+                                TotalQuantity = totalQuantity,
+                                TotalSalesAmount = totalSalesAmount
+                            });
+                        }
+                    }
+                }
+            }
+
+            return salesSummary; // Возвращаем список с данными о суммарных продажах
+        }
+
+        private void buttonGenerateReport_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = dateTimePickerStartDate.Value;
+            DateTime endDate = dateTimePickerEndDate.Value;
+
+            List<SalesSummaryEntry> salesSummaryData = LoadSalesReport(startDate, endDate);
+
+            SalesReportForm salesReportForm = new SalesReportForm(salesSummaryData);
+            salesReportForm.ShowDialog(); // Открывает новое окно как модальное
+        }
+
     }
 }

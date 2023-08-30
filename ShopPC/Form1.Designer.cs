@@ -120,6 +120,10 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewSales = new System.Windows.Forms.DataGridView();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.buttonGenerateReport = new System.Windows.Forms.Button();
+            this.dateTimePickerStartDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -156,6 +160,7 @@
             this.tabPage5.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSales)).BeginInit();
+            this.groupBox14.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1206,14 +1211,17 @@
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnCount = 2;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.13741F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
             this.tableLayoutPanel5.Controls.Add(this.dataGridViewSales, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.groupBox14, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(786, 580);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
@@ -1228,8 +1236,52 @@
             this.dataGridViewSales.MultiSelect = false;
             this.dataGridViewSales.Name = "dataGridViewSales";
             this.dataGridViewSales.ReadOnly = true;
-            this.dataGridViewSales.Size = new System.Drawing.Size(780, 574);
+            this.dataGridViewSales.Size = new System.Drawing.Size(587, 574);
             this.dataGridViewSales.TabIndex = 0;
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox14.Controls.Add(this.dateTimePickerEndDate);
+            this.groupBox14.Controls.Add(this.dateTimePickerStartDate);
+            this.groupBox14.Controls.Add(this.buttonGenerateReport);
+            this.groupBox14.Location = new System.Drawing.Point(596, 3);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(187, 104);
+            this.groupBox14.TabIndex = 1;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Отчет";
+            // 
+            // buttonGenerateReport
+            // 
+            this.buttonGenerateReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonGenerateReport.Location = new System.Drawing.Point(6, 71);
+            this.buttonGenerateReport.Name = "buttonGenerateReport";
+            this.buttonGenerateReport.Size = new System.Drawing.Size(172, 23);
+            this.buttonGenerateReport.TabIndex = 0;
+            this.buttonGenerateReport.Text = "Сформировать отчет";
+            this.buttonGenerateReport.UseVisualStyleBackColor = true;
+            this.buttonGenerateReport.Click += new System.EventHandler(this.buttonGenerateReport_Click);
+            // 
+            // dateTimePickerStartDate
+            // 
+            this.dateTimePickerStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePickerStartDate.Location = new System.Drawing.Point(6, 19);
+            this.dateTimePickerStartDate.Name = "dateTimePickerStartDate";
+            this.dateTimePickerStartDate.Size = new System.Drawing.Size(172, 20);
+            this.dateTimePickerStartDate.TabIndex = 1;
+            // 
+            // dateTimePickerEndDate
+            // 
+            this.dateTimePickerEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePickerEndDate.Location = new System.Drawing.Point(6, 45);
+            this.dateTimePickerEndDate.Name = "dateTimePickerEndDate";
+            this.dateTimePickerEndDate.Size = new System.Drawing.Size(172, 20);
+            this.dateTimePickerEndDate.TabIndex = 2;
             // 
             // Form1
             // 
@@ -1286,6 +1338,7 @@
             this.tabPage5.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSales)).EndInit();
+            this.groupBox14.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1383,6 +1436,10 @@
         private System.Windows.Forms.NumericUpDown numericUpDownSaleQuantity;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEndDate;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStartDate;
+        private System.Windows.Forms.Button buttonGenerateReport;
     }
 }
 
