@@ -14,6 +14,8 @@ namespace ShopPC
         [STAThread]
         static void Main()
         {
+            string connectionString = "Data Source=ShopPC.db;";
+            DatabaseManager.CreateDatabaseIfNotExists(connectionString);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
